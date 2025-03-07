@@ -7,35 +7,30 @@ import { queryBuilder } from "../../utils";
 import mongoose from "mongoose";
 import { passwordResetTokenModel } from "src/models/password-token-schema";
 import { usersModel } from "src/models/user/user-schema";
-import { platformModel } from "src/models/platform/platform-schema";
-import { targetModel } from "src/models/target/target-schema";
-import { technologyModel } from "src/models/technology/technology-schema";
-import { leadModel } from "src/models/lead-schema";
-import { statusModel } from "src/models/status-schema";
 import { customAlphabet } from "nanoid";
 
 
 // Lead
 export const getleadService = async (payload: any, res: Response) => {
    
-    const users = await usersModel.find({});
-    const status = await statusModel.find({});
-    const technology = await technologyModel.find({});
-    const platform = await platformModel.find({});
+    // const users = await usersModel.find({});
+    // const status = await statusModel.find({});
+    // const technology = await technologyModel.find({});
+    // const platform = await platformModel.find({});
 
 
-    const response = {
-        success: true,
-        message: "Lead services fetched successfully",
-        data: {
-          users,
-          status,
-          technology,
-          platform,
-        }
-    }
+    // const response = {
+    //     success: true,
+    //     message: "Lead services fetched successfully",
+    //     data: {
+    //       users,
+    //       status,
+    //       technology,
+    //       platform,
+    //     }
+    // }
 
-    return response
+    // return response
 }
 
 

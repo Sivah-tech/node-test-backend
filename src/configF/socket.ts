@@ -1,3 +1,5 @@
+// config/socket.ts
+
 import { Server as SocketIOServer } from "socket.io";
 import { Server as HttpServer } from "http";
 
@@ -14,14 +16,7 @@ export const initializeSocket = (httpServer: HttpServer) => {
 
   // Handle socket connections
   io.on("connection", (socket) => {
-    // console.log(`New client connected: ${socket.id}`);
-
-
-    // Store user ID in the socket object (or any other custom data storage)
-    socket.on("set_user_id", (userId: string) => {
-      socket.data.userId = userId; // Store user ID in socket's custom data
-      // console.log(`User ID ${userId} set for socket: ${socket.id}`);
-    });
+    console.log(`New client connected: ${socket.id}`);
 
     // Join a room
     socket.on("join_room", (roomId: string) => {
@@ -37,9 +32,8 @@ export const initializeSocket = (httpServer: HttpServer) => {
 
     // Listen for a message event and send it to the room
     socket.on("send_message", (roomId: string, message: string) => {
-      const userId = socket.data.userId || socket.id; // Fallback to socket.id if no user ID is set
-      console.log(`Message from ${userId} in room: ${roomId}: ${message}`);
-      io.to(roomId).emit("receive_message", { userId, message }); // Broadcast to users in the room
+      console.log(`Message from ${socket.id} in room ${roomId}: ${message}`);
+      io.to(roomId).emit("receive_message", { userId: socket.id, message }); // Broadcast to users in the room
     });
 
     // Handle disconnection

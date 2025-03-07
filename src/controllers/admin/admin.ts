@@ -1,11 +1,8 @@
 import { Request, Response } from "express"
 import { formatZodErrors } from "../../validation/format-zod-errors";
 import {
-    loginService, newPassswordAfterOTPVerifiedService, forgotPasswordService, getAllUsersService,
-    getAUserService, updateAUserService, deleteAUserService, getDashboardStatsService,
-    createbidService, updateABidService, dashboardOverviewstatservice, dashboardchartstatservice,
-    getAllusertechService, gettargetDashboardstatsService, createtargetService, updatetargetService,
-    targetstatservice, targetpercentstatservice, targetteamstatservice, targetrevenuestatservice, getAllFaqService , getAllsuggestionService, getAlltestimonailService
+    loginService, newPassswordAfterOTPVerifiedService, forgotPasswordService,getAlluserService,getUserInfoService,createuserService,createcontactService,
+    getAUserService, updateAUserService, deleteAUserService, getDashboardStatsService,getAllFaqService , getAllsuggestionService, getAlltestimonailService
 
 } from "../../services/admin/admin-service";
 import { errorParser } from "../../lib/errors/error-response-handler";
@@ -50,16 +47,6 @@ export const newPassswordAfterOTPVerified = async (req: Request, res: Response) 
     }
 }
 
-export const getAllUsers = async (req: Request, res: Response) => {
-    try {
-        const response = await getAllUsersService(req.query)
-        return res.status(httpStatusCode.OK).json(response)
-    } catch (error: any) {
-        const { code, message } = errorParser(error)
-        return res.status(code || httpStatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: message || "An error occurred" });
-    }
-}
-
 
 
 export const getAllfaq = async (req: Request, res: Response) => {
@@ -92,6 +79,15 @@ export const getAlltestimonail = async (req: Request, res: Response) => {
     }
 }
 
+export const contactUs = async (req: Request, res: Response) => {
+    try {
+        const response = await createcontactService({ currentUser: (req as any).currentUser, ...req.body }, res)
+        return res.status(httpStatusCode.CREATED).json(response)
+    } catch (error: any) {
+        const { code, message } = errorParser(error)
+        return res.status(code || httpStatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: message || "An error occurred" });
+    }
+}
 
 
 
@@ -128,6 +124,18 @@ export const updateAUser = async (req: Request, res: Response) => {
 export const getDashboardStats = async (req: Request, res: Response) => {
     try {
         const response = await getDashboardStatsService(req, res)
+        return res.status(httpStatusCode.OK).json(response)
+    } catch (error: any) {
+        const { code, message } = errorParser(error)
+        return res.status(code || httpStatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: message || "An error occurred" });
+    }
+}
+
+
+export const getAllUsers = async (req: Request, res: Response) => {
+    try {
+        // console.log(req.query);
+        const response = await getAlluserService(req.query)
         return res.status(httpStatusCode.OK).json(response)
     } catch (error: any) {
         const { code, message } = errorParser(error)
@@ -238,6 +246,17 @@ export const createtarget = async (req: Request, res: Response) => {
     }
 }
 
+export const createUser = async (req: Request, res: Response) => {
+    try {
+        const response = await createuserService({ currentUser: (req as any).currentUser, ...req.body }, res)
+        return res.status(httpStatusCode.CREATED).json(response)
+    } catch (error: any) {
+        const { code, message } = errorParser(error)
+        return res.status(code || httpStatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: message || "An error occurred" });
+    }
+}
+
+
 
 export const updatetarget = async (req: Request, res: Response) => {
     try {
@@ -284,6 +303,16 @@ export const targetpercentstat = async (req: Request, res: Response) => {
         );
         
         return res.status(httpStatusCode.CREATED).json(response)
+    } catch (error: any) {
+        const { code, message } = errorParser(error)
+        return res.status(code || httpStatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: message || "An error occurred" });
+    }
+}
+
+export const getUserInfo = async (req: Request, res: Response) => {
+    try {
+        const response = await getUserInfoService(req.params.id, res)
+        return res.status(httpStatusCode.OK).json(response)
     } catch (error: any) {
         const { code, message } = errorParser(error)
         return res.status(code || httpStatusCode.INTERNAL_SERVER_ERROR).json({ success: false, message: message || "An error occurred" });

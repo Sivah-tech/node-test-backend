@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-
 const usersSchema = new Schema({
     identifier: {
         type: String,
@@ -9,7 +8,7 @@ const usersSchema = new Schema({
     role: {
         type: String,
         required: true,
-        default: "user" 
+        default: "user"
     },
     fullName: {
         type: String,
@@ -27,17 +26,15 @@ const usersSchema = new Schema({
     },
     phoneNumber: {
         type: String,
-        default: null 
+        default: null
     },
-    profilePic:  {
+    profilePic: {
         type: String,
-        default: null 
+        default: null
     },
-    address: { 
+    address: {
         type: String,
-        default: null 
+        default: null
     },
-}, { timestamps: true })
-
-
-export const usersModel = model("users", usersSchema)
+}, { timestamps: true });
+export const usersModel = model("users", usersSchema);
