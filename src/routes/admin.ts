@@ -12,7 +12,7 @@ import {
 } from "../controllers/product/product";
 
 
-import {  createlead, getAllleads, getAlead, updateAlead } from "../controllers/lead/lead";
+
 // import { checkAdminAuth } from "../middleware/check-auth";
 import { upload } from "../configF/multer";
 import { checkMulter } from "../lib/errors/error-response-handler"
