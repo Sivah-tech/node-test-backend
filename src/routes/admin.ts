@@ -25,10 +25,6 @@ const router = Router();
 router.get("/dashboard", checkAuth, getDashboardStats)
 router.route("/users").get(checkAuth, getAllUsers).post(checkAuth, createUser)
 router.route("/user/:id").get(checkAuth, getUserInfo).patch(checkAuth, updateAUser).delete(checkAuth, deleteAUser)
-
-router.route("/lead").post(checkAuth, createlead).get(checkAuth, getAllleads)
-router.route("/lead/:id").get(checkAuth, getAlead).patch(checkAuth, updateAlead)
-
 // category and product
 
 router.route("/categories").get(checkAuth, getAllcategories).post(checkAuth, createCategory)
