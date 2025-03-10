@@ -10,6 +10,7 @@ import bodyParser from 'body-parser'
 import { login } from "./controllers/admin/admin"
 import { forgotPassword , getAllfaq, getAllsuggestion, getAlltestimonail, contactUs} from "./controllers/admin/admin"
 import {  verifyOtpPasswordReset, newPassswordAfterOTPVerified } from "./controllers/user/user";
+import {  getProductByCategory } from "./controllers/product/product";
 import { initializeSocket  } from "./configF/socket"
 import {
   getAllcategories
@@ -67,6 +68,7 @@ app.use("/api/suggestions", getAllsuggestion)
 app.use("/api/testimonail", getAlltestimonail)
 app.use("/api/contact-us", contactUs)
 app.use("/api/categories", getAllcategories)
+app.use("/api/productbycategory/:id", getProductByCategory)
 
 // app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
 
